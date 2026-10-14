@@ -78,3 +78,22 @@ body.xmas h2{color:var(--gold);font-size:28px}
 .gruppen li span{color:var(--text2);font-size:16px}
 @media (prefers-reduced-motion:no-preference){.baum .stern{animation:funkeln 3s ease-in-out infinite}}
 @keyframes funkeln{50%{filter:drop-shadow(0 0 18px #ffd36b);transform:scale(1.08)}}
+
+/* XMAS „Bling“ (Markus 14.10. abends: „bissl mehr bling bling“): Glanzbaum als SVG mit funkelnden Lichtern, Goldgirlanden,
+   Sternstrahlen und Glitzer; Überschrift mit Goldschimmer. Bewegung nur, wenn das Gerät sie nicht abgeschaltet hat. */
+.glanzbaum{display:block;width:min(260px,70vw);height:auto;margin:0 auto;filter:drop-shadow(0 0 30px rgba(255,200,110,.45))}
+.buehne .unter{background:linear-gradient(100deg,#b8801f 0,#fff2b0 45%,#e8b14a 55%,#b8801f 100%);background-size:200% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+@media (prefers-reduced-motion:no-preference){
+  .lichter-baum circle{animation:blinken 1.8s ease-in-out infinite}
+  .lichter-baum circle:nth-child(3n){animation-delay:.6s}.lichter-baum circle:nth-child(3n+1){animation-delay:1.2s}
+  .glitzer path{transform-box:fill-box;transform-origin:center;animation:glitzern 2.6s ease-in-out infinite}
+  .glitzer path:nth-child(2n){animation-delay:1.3s}.glitzer path:nth-child(3n){animation-delay:.7s}
+  .strahlen{animation:strahlen 6s linear infinite}
+  .stern{transform-box:fill-box;transform-origin:center;animation:funkeln 2.4s ease-in-out infinite}
+  .buehne .unter{animation:schimmer 4s linear infinite}
+}
+@keyframes blinken{50%{opacity:.25}}
+@keyframes glitzern{0%,100%{opacity:0;transform:scale(.4)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes strahlen{from{transform:translate(120px,34px) rotate(0)}to{transform:translate(120px,34px) rotate(360deg)}}
+@keyframes schimmer{from{background-position:200% 0}to{background-position:-200% 0}}
