@@ -101,3 +101,9 @@ body.xmas h2{color:var(--gold);font-size:28px}
 /* Platzhalter für das Higgsfield-Kopfbild (Markus 14.10.: gezeichneter Baum „wie von einem 3-Jährigen“ -> entfernt).
    Sobald das Bild da ist: .kopfbild{background-image:url(xmas-kopf.webp)} */
 .kopfbild{height:120px;margin:0 auto;max-width:520px;background:radial-gradient(ellipse at 50% 60%,rgba(255,205,120,.38) 0,transparent 65%)}
+
+/* Kopfbild aus Higgsfield (H5b „Mittelding“, Nano Banana Pro, 14.10.2026, KI-Bild) */
+.buehne{padding-top:0}
+.kopfbild{height:auto;max-width:none;aspect-ratio:16/9;margin:8px -16px 0;border-radius:18px;overflow:hidden;background:url(xmas-kopf.webp) center/cover no-repeat;box-shadow:0 0 60px rgba(255,200,110,.18);-webkit-mask:linear-gradient(180deg,#000 70%,transparent 100%);mask:linear-gradient(180deg,#000 70%,transparent 100%)}
+.buehne h1{margin-top:-28px}
+.ki-hinweis{font-size:13px;color:var(--text3);text-align:right;margin:4px 0 0}
