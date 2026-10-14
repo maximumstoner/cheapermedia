@@ -22,7 +22,10 @@
 <main>
 <a class="marke" href="/" aria-label="CHEAPER Media, Startseite"><span class="wm" role="img" aria-label="CHEAPER Media"><b aria-hidden="true">Cheaper</b><i aria-hidden="true">Media</i></span></a>
 <header class="buehne">
-  <div class="kopfbild" role="img" aria-label="Leuchtender Weihnachtsbaum mit Geschenken auf dunkelgrünem Hintergrund"></div>
+  <div class="kopfbild" role="img" aria-label="Leuchtender Weihnachtsbaum mit Geschenken, darüber eine Lupe">
+    <div class="foto"></div>
+    <div class="lupe" aria-hidden="true"><div class="griff"></div><div class="glas"><div class="innen"><div class="foto"></div></div></div></div>
+  </div>
   <p class="ki-hinweis">Bild: KI-generiert</p>
   <h1>CHEAPER XMAS <span class="unter">Geschenke-Deal Radar</span></h1>
   <p class="spruch">Christkind und Weihnachtsmann kaufen günstig ein.</p>
@@ -84,5 +87,32 @@ https://cheapermedia.at/xmas/beispiel</div>
 
 <footer><a href="/">CHEAPER Media</a> · <a href="../impressum/">Impressum</a> · <a href="../offenlegung/">Offenlegung</a> · <a href="../datenschutz/">Datenschutz</a></footer>
 </main>
+<script>
+/* Lupe über dem Kopfbild (wie auf cheapersneakerdeals.de): vergrößert das Bild darunter.
+   Anfassen am Griff (Maus oder Finger); losgelassen treibt sie langsam über dem Baum. */
+(function(){
+  var box = document.querySelector('.kopfbild'); if (!box) return;
+  var lupe = box.querySelector('.lupe'), griff = box.querySelector('.griff'), glas = box.querySelector('.glas'), innen = box.querySelector('.innen'), bild = innen.querySelector('.foto');
+  var ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var w = 0, h = 0, d = 180, bw = 10, k = 1.8, ax = 0, ay = 0, zx = 0, zy = 0, greift = false, aktiv = false, timer = 0, ox = 0, oy = 0, t0 = performance.now();
+  function mass(){ w = box.clientWidth; h = box.clientHeight; d = lupe.offsetWidth || d; bw = parseFloat(getComputedStyle(glas).borderTopWidth) || bw;
+    k = parseFloat(getComputedStyle(box).getPropertyValue('--k')) || k; bild.style.width = w + 'px'; bild.style.height = h + 'px'; }
+  function setz(){ var c = (d - 2 * bw) / 2;
+    lupe.style.transform = 'translate3d(' + (ax - d / 2).toFixed(1) + 'px,' + (ay - d / 2).toFixed(1) + 'px,0)';
+    innen.style.transform = 'translate3d(' + (c - ax * k).toFixed(1) + 'px,' + (c - ay * k).toFixed(1) + 'px,0) scale(' + k + ')'; }
+  function ziel(t){ var s = (t - t0) / 1000; zx = w * (0.5 + 0.14 * Math.sin(s * .19)); zy = h * (0.46 + 0.1 * Math.sin(s * .27 + 1)); }
+  function tick(t){ if (!aktiv) ziel(t); var f = greift ? .35 : (aktiv ? .2 : .03); ax += (zx - ax) * f; ay += (zy - ay) * f; setz(); requestAnimationFrame(tick); }
+  function grenzen(x, y){ var r = d * .3; return [Math.min(Math.max(x, r), w - r), Math.min(Math.max(y, r), h - r)]; }
+  mass(); ziel(t0); ax = zx; ay = zy; setz();
+  addEventListener('resize', function(){ mass(); setz(); });
+  if (ruhig) return;
+  requestAnimationFrame(tick);
+  griff.addEventListener('pointerdown', function(e){ var r = box.getBoundingClientRect(); greift = aktiv = true; clearTimeout(timer);
+    ox = e.clientX - r.left - ax; oy = e.clientY - r.top - ay; lupe.classList.add('greift'); try { griff.setPointerCapture(e.pointerId); } catch (x) {} e.preventDefault(); });
+  griff.addEventListener('pointermove', function(e){ if (!greift) return; var r = box.getBoundingClientRect(), p = grenzen(e.clientX - r.left - ox, e.clientY - r.top - oy); zx = p[0]; zy = p[1]; });
+  function los(){ if (!greift) return; greift = false; lupe.classList.remove('greift'); timer = setTimeout(function(){ aktiv = false; }, 1500); }
+  griff.addEventListener('pointerup', los); griff.addEventListener('pointercancel', los);
+})();
+</script>
 </body>
 </html>
