@@ -2,77 +2,452 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CHEAPER XMAS</title>
-<meta name="description" content="CHEAPER XMAS, das Geschenke-Deal Radar: Weihnachtsartikel, Geschenke und Spielzeug ab 5 Jahren für Österreich und Deutschland, vor der Veröffentlichung mit anderen Shops verglichen.">
-<link rel="stylesheet" href="../assets/stil.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CHEAPER XMAS – Geschenke-Deals für Österreich und Deutschland</title>
+<meta name="description" content="Jeden Tag geprüfte Geschenke-Deals für Österreich und Deutschland, kostenlos im WhatsApp- und Telegram-Kanal. Kein Shop: Du kaufst wie immer beim Händler.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/inter-latin.woff2) format("woff2")}
+@font-face{font-family:"DM Serif Display";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/dmserif-italic-latin.woff2) format("woff2")}
+:root{--rot:#E10A1F;--schwarz:#0C0C0C;--tanne:#0D3B2E;--gold:#E8B14A;--soft:#C9C9CE;--wa:#25D366;--tg:#2AABEE;
+  --serif:"DM Serif Display",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--max:1180px;--rand:clamp(18px,4vw,40px)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{margin:0;background:var(--schwarz);color:#fff;font:18px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:none}
+a{color:inherit}
+:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--rand);padding-right:var(--rand)}
+.wm{display:inline-block;font-weight:900;font-style:italic;text-transform:uppercase;letter-spacing:-.045em;line-height:.86;font-size:26px}
+.wm b,.wm i{display:block;font-style:italic;font-weight:900}.wm b{color:#fff}.wm i{color:var(--rot)}
+header.kopf{position:absolute;inset:0 0 auto 0;z-index:20;padding-top:max(16px,env(safe-area-inset-top))}
+.kopf .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.kopf a{text-decoration:none}
+.kopf nav a{font-weight:700;font-size:16px;opacity:.85;padding:10px 0}
+
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background:var(--schwarz)}
+.hero .film{position:absolute;inset:0;overflow:hidden}
+.ebene{position:absolute;left:0;top:0}
+.ebene>img{position:absolute;inset:0;width:100%;height:100%}
+.hero .schleier{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  linear-gradient(90deg,rgba(12,12,12,.88) 0%,rgba(12,12,12,.7) 30%,rgba(12,12,12,.25) 46%,rgba(12,12,12,0) 56%),
+  linear-gradient(180deg,rgba(12,12,12,.5) 0%,rgba(12,12,12,0) 22%,rgba(12,12,12,0) 70%,rgba(12,12,12,.85) 100%)}
+.ki{position:absolute;z-index:2;right:var(--rand);bottom:10px;font-size:12px;color:rgba(255,255,255,.55)}
+
+/* Produkte in der Glas-Ebene: in Kugeln rund beschnitten, in Schachteln stehend */
+.kugel{position:absolute;border-radius:50%;overflow:hidden;display:grid;place-items:center}
+.kugel img{width:54%;height:54%;object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.45))}
+.kugel::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse 40% 26% at 34% 26%,rgba(255,255,255,.55),rgba(255,255,255,0) 100%),radial-gradient(circle at 50% 50%,transparent 60%,rgba(255,255,255,.18) 100%)}
+/* Produkt steckt in der offenen Schachtel: unterer Teil verschwindet hinter dem Rand */
+.schachtel{position:absolute;overflow:hidden}
+.schachtel img{position:absolute;left:0;bottom:-28%;width:100%;height:128%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 -4px 16px rgba(255,200,120,.35))}
+
+/* Lupe 1:1 wie cheapersneakerdeals.de */
+.hero .lupe{position:absolute;z-index:30;left:0;top:0;width:var(--d);height:var(--d);pointer-events:none;will-change:transform}
+.hero .griff{pointer-events:auto;cursor:grab;touch-action:none}
+.hero .lupe.greift .griff{cursor:grabbing}
+.hero .griff,.lupe-gross .griff{position:absolute;left:50%;top:50%;width:calc(var(--d)*.15);height:calc(var(--d)*1.22);margin-left:calc(var(--d)*-.075);transform-origin:50% 0;transform:rotate(-45deg);
+  border-radius:0 0 calc(var(--d)*.075) calc(var(--d)*.075) / 0 0 calc(var(--d)*.06) calc(var(--d)*.06);
+  background:
+    radial-gradient(ellipse 60% 4% at 48% 78%,rgba(255,255,255,.22),transparent 100%),
+    radial-gradient(ellipse 70% 3% at 55% 61%,rgba(255,255,255,.14),transparent 100%),
+    radial-gradient(ellipse 45% 5% at 40% 92%,rgba(0,0,0,.28),transparent 100%),
+    repeating-linear-gradient(176deg,rgba(255,255,255,0) 0 7px,rgba(255,255,255,.06) 7px 8px,rgba(0,0,0,0) 8px 13px,rgba(0,0,0,.12) 13px 14px),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+    linear-gradient(90deg,#3d0509 0%,#8c0812 18%,#b80a18 40%,#c9202c 50%,#aa0915 64%,#6b0610 86%,#330308 100%);
+  background-blend-mode:normal,normal,normal,normal,soft-light,normal;
+  box-shadow:calc(var(--d)*.03) calc(var(--d)*.05) calc(var(--d)*.14) rgba(0,0,0,.7),inset calc(var(--d)*.01) 0 calc(var(--d)*.02) rgba(255,255,255,.08),inset 0 calc(var(--d)*-.03) calc(var(--d)*.04) rgba(0,0,0,.45)}
+.hero .griff::before,.lupe-gross .griff::before{content:"";position:absolute;left:-16%;right:-16%;top:calc(var(--d)*.49);height:calc(var(--d)*.15);border-radius:4px;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),linear-gradient(90deg,#1a1a1a 0%,#6a6a6a 22%,#0d0d0d 50%,#4a4a4a 78%,#111 100%),linear-gradient(180deg,rgba(255,255,255,.15),rgba(0,0,0,.4));background-blend-mode:soft-light,overlay,normal;box-shadow:0 3px 7px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.2)}
+.hero .griff::after{content:"";position:absolute;left:-110%;right:-110%;top:calc(var(--d)*.5);bottom:-14px}
+.hero .glas,.lupe-gross .glas{position:absolute;inset:0;border-radius:50%;overflow:hidden;box-sizing:border-box;border:calc(var(--d)*.055) solid #151515;background:#000;
+  box-shadow:0 calc(var(--d)*.1) calc(var(--d)*.22) rgba(0,0,0,.7),inset 0 0 calc(var(--d)*.1) rgba(0,0,0,.45)}
+/* Metallring mit Kante: liegt über dem Rand des Glases */
+.hero .lupe::before,.lupe-gross::before{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;z-index:2;
+  -webkit-mask:radial-gradient(circle closest-side,transparent calc(100% - var(--d)*.064),#000 calc(100% - var(--d)*.06));mask:radial-gradient(circle closest-side,transparent calc(100% - var(--d)*.064),#000 calc(100% - var(--d)*.06));
+  background:
+    repeating-conic-gradient(from 20deg,rgba(255,255,255,0) 0 11deg,rgba(255,255,255,.14) 11deg 12deg,rgba(255,255,255,0) 12deg 19deg,rgba(0,0,0,.25) 19deg 20.5deg,rgba(255,255,255,0) 20.5deg 33deg,rgba(255,255,255,.08) 33deg 35deg,rgba(255,255,255,0) 35deg 47deg),
+    radial-gradient(circle at 18% 30%,rgba(255,255,255,.35) 0 1.2%,transparent 2.4%),
+    radial-gradient(circle at 76% 22%,rgba(255,255,255,.3) 0 .9%,transparent 2%),
+    radial-gradient(circle at 62% 88%,rgba(255,255,255,.28) 0 1.4%,transparent 2.6%),
+    radial-gradient(circle at 28% 80%,rgba(0,0,0,.4) 0 1%,transparent 2.2%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 .55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>"),
+    radial-gradient(circle closest-side,transparent calc(100% - var(--d)*.062),rgba(255,255,255,.3) calc(100% - var(--d)*.058),#2a2a2a calc(100% - var(--d)*.048),#0b0b0b calc(100% - var(--d)*.03),#3a3a3a calc(100% - var(--d)*.012),#777 calc(100% - 1.5px),#111 100%);
+  background-blend-mode:normal,normal,normal,normal,normal,soft-light,normal}
+  background:radial-gradient(circle closest-side,transparent calc(100% - var(--d)*.062),rgba(255,255,255,.3) calc(100% - var(--d)*.058),#2a2a2a calc(100% - var(--d)*.048),#0b0b0b calc(100% - var(--d)*.03),#3a3a3a calc(100% - var(--d)*.012),#777 calc(100% - 1.5px),#111 100%)}
+/* Glas: Randvignette, Lichtreflex oben links, schmaler Reflexstreifen */
+.hero .glas::after,.lupe-gross .glas::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 50% 50%,transparent 58%,rgba(0,0,0,.42) 100%),
+             radial-gradient(ellipse 34% 22% at 32% 22%,rgba(255,255,255,.34),rgba(255,255,255,0) 100%),
+             linear-gradient(135deg,rgba(255,255,255,0) 38%,rgba(255,255,255,.1) 44%,rgba(255,255,255,0) 50%)}
+.hero .glas .innen{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform;background:var(--schwarz)}
+.hero{--d:150px;--k:2.2}
+/* Griff als Zuckerstange wie im CHEAPER-XMAS-Logo (grafik/logo/xmas/linie-logo.png): rot-weiß schräg gestreift, rund schattiert */
+.hero .griff{background:
+    linear-gradient(90deg,rgba(0,0,0,.45) 0%,rgba(0,0,0,0) 22%,rgba(255,255,255,.5) 34%,rgba(255,255,255,0) 48%,rgba(0,0,0,0) 68%,rgba(0,0,0,.5) 100%),
+    repeating-linear-gradient(38deg,#D90A1E 0 calc(var(--d)*.05),#FBF7F2 calc(var(--d)*.05) calc(var(--d)*.095));
+  background-blend-mode:normal,normal;border:1.5px solid rgba(0,0,0,.6)}
+
+.hero .inhalt{position:relative;z-index:4;width:100%;padding-top:120px;padding-bottom:clamp(28px,6vh,64px);pointer-events:none}
+.hero .inhalt a{pointer-events:auto}
+.hero .innen .inhalt,.hero .innen .kopf{z-index:auto;pointer-events:none;margin:0;max-width:none;inset:auto}
+.text{max-width:700px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--rot);box-shadow:0 0 0 0 rgba(225,10,31,.7);animation:puls 2.2s infinite}
+@keyframes puls{to{box-shadow:0 0 0 14px rgba(225,10,31,0)}}
+.kein-shop{margin:14px 0 0;font-weight:800;font-size:clamp(16px,1.5vw,19px)}
+.kein-shop b{font-family:"Great Vibes",var(--serif);font-weight:400;font-size:1.7em;line-height:1;color:var(--gold);margin-right:.15em;text-shadow:0 0 12px rgba(232,177,74,.35)}
+h1{font-size:clamp(44px,5.8vw,86px);font-weight:900;letter-spacing:-.035em;text-transform:uppercase;line-height:.92;margin:16px 0 20px}
+h1 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:-.01em;color:var(--rot);font-size:1.02em}
+.lead{font-size:clamp(18px,1.6vw,20px);line-height:1.45;margin:0 0 22px;max-width:30em}
+.lead b{font-weight:800}
+.cta{display:flex;flex-direction:column;gap:12px;max-width:560px}
+.knopf{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:64px;padding:14px 26px;border-radius:999px;font-weight:800;font-size:20px;text-decoration:none;white-space:nowrap}
+.knopf svg{width:26px;height:26px;flex:none}
+.knopf.wa{background:var(--wa);color:#062A18;box-shadow:0 12px 34px rgba(37,211,102,.28);min-height:64px;font-size:19px}
+.knopf.tg{background:var(--tg);color:#04202E;min-height:64px;font-size:19px}
+
+/* Karte: was gerade unter der Lupe liegt */
+.unter{position:absolute;z-index:29;right:var(--rand);bottom:clamp(40px,8vh,80px);width:300px;padding:12px 16px 13px;border-radius:16px 16px 16px 4px;background:#144D37;color:#fff;font-size:15px;line-height:1.4;box-shadow:0 10px 30px rgba(0,0,0,.55);transition:opacity .3s}
+.unter small{display:block;font-size:12px;color:#9fd8bd}
+.unter b{display:block;font-size:17px;line-height:1.25;margin:2px 0}
+.unter.leer{opacity:0}
+
+@media (max-width:700px){
+    .hero{display:block;min-height:0;--d:104px;--k:3.4}
+  .hero .film{position:relative;inset:auto;height:68svh;min-height:420px;max-height:640px}
+  .hero .schleier{background:linear-gradient(180deg,rgba(12,12,12,.4) 0%,rgba(12,12,12,0) 25%,rgba(12,12,12,0) 75%,var(--schwarz) 100%)}
+  .hero .inhalt{padding-top:6px;padding-bottom:28px}
+  .eyebrow{display:none}
+  .kein-shop{font-size:15px;margin:0 0 6px}
+  h1{font-size:clamp(38px,11.5vw,54px);margin:6px 0 14px}
+  .text{max-width:none}
+  .lead{font-size:17px}
+  .unter{left:var(--rand);right:auto;bottom:auto;top:calc(min(max(68svh,420px),640px) - 74px);width:auto;max-width:72%;padding:8px 11px 9px;font-size:12.5px;border-radius:12px 12px 12px 4px}
+  .unter b{font-size:14px}
+  .unter small{font-size:10.5px}
+  .ki{bottom:auto;top:calc(min(max(68svh,420px),640px) - 22px)}
+}
+@media (prefers-reduced-motion:reduce){.eyebrow::before{animation:none}}
+
+/* Weihnachtlich: Schreibschrift in Gold, Lichterkette, Schneefall, Schnee auf Knöpfen und Wortmarke */
+h1 em{font-family:"Great Vibes",var(--serif);font-style:normal;font-size:1.32em;letter-spacing:0;line-height:.9;display:inline-block;padding:.05em .18em .12em 0;
+  background:linear-gradient(180deg,#FFE7A8 0%,#E8B14A 45%,#B9832A 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 18px rgba(232,177,74,.35))}
+.hero .waerme{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+  radial-gradient(60% 55% at 22% 62%,rgba(232,177,74,.13),transparent 70%),
+  radial-gradient(40% 40% at 8% 20%,rgba(225,10,31,.10),transparent 70%)}
+@keyframes funkeln{50%{opacity:.45}}
+#schnee{position:absolute;inset:0;z-index:3;width:100%;height:100%;pointer-events:none}
+.knopf{position:relative}
+.knopf::before{content:"";position:absolute;left:7%;right:7%;top:-9px;height:20px;pointer-events:none;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 30' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23ffffff'/><stop offset='1' stop-color='%23dfe8ef'/></linearGradient></defs><path d='M6 22 C10 8 30 4 60 6 C90 2 120 7 150 4 C185 1 215 6 250 3 C285 1 320 6 350 4 C375 3 392 8 395 18 C396 24 388 23 382 21 C378 27 372 29 366 24 C360 21 350 22 340 21 C320 20 300 24 280 21 C262 19 250 26 240 21 C225 18 200 22 180 21 C160 20 140 23 120 21 C108 20 100 28 92 22 C84 18 60 22 40 21 C26 20 16 24 10 25 C4 26 3 24 6 22 Z' fill='url(%23g)'/></svg>") 0 0/100% 100% no-repeat;filter:drop-shadow(0 2px 2px rgba(0,0,0,.28))}
+.wm{position:relative}
+.wm::before{content:"";position:absolute;left:0;right:6px;top:-9px;height:11px;pointer-events:none;background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 30' preserveAspectRatio='none'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23ffffff'/><stop offset='1' stop-color='%23dfe8ef'/></linearGradient></defs><path d='M6 22 C10 8 30 4 60 6 C90 2 120 7 150 4 C185 1 215 6 250 3 C285 1 320 6 350 4 C375 3 392 8 395 18 C396 24 388 23 382 21 C378 27 372 29 366 24 C360 21 350 22 340 21 C320 20 300 24 280 21 C262 19 250 26 240 21 C225 18 200 22 180 21 C160 20 140 23 120 21 C108 20 100 28 92 22 C84 18 60 22 40 21 C26 20 16 24 10 25 C4 26 3 24 6 22 Z' fill='url(%23g)'/></svg>") 0 0/100% 100% no-repeat;filter:drop-shadow(0 1px 1px rgba(0,0,0,.3))}
+.kette{position:absolute;left:0;top:-110px;z-index:3;width:100%;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 85%);mask-image:linear-gradient(180deg,#000 55%,transparent 85%);height:auto;pointer-events:none;mix-blend-mode:screen;opacity:.95}
+.knopf.wa .schmuck{position:absolute;right:7%;top:-34px;width:120px;height:auto;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+@media (max-width:700px){.kette{top:-30px;width:170%;max-width:none;left:-35%}.knopf.wa .schmuck{width:92px;top:-27px;right:5%}}
+/* Moderne grüne Deko auf dem WhatsApp-Knopf: Lebkuchenmann links, Zuckerstangen und Zweige rechts (Fotos, freigestellt) */
+.cta{margin-top:70px}
+.knopf.wa::before{display:none}
+.knopf.wa .lebkuchen,.knopf.wa .zweige{position:absolute;bottom:calc(100% - 10px);height:auto;pointer-events:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,.45))}
+.knopf.wa .lebkuchen{left:6%;width:84px}
+.knopf.wa .zweige{right:5%;width:200px}
+@media (max-width:700px){.cta{margin-top:58px}.knopf.wa .lebkuchen{width:66px}.knopf.wa .zweige{width:150px}}
+
+/* Knöpfe wie bei großen Kanälen: Logo unverändert im weißen Kreis, beide gleich groß, am PC nebeneinander */
+.knopf{justify-content:flex-start;padding:10px 26px 10px 10px}
+.marke-kreis{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:#fff;flex:none;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.marke-kreis svg{width:26px;height:26px}
+.wa-kreis{color:#25D366}.tg-kreis{color:#2AABEE}
+@media (min-width:701px){.cta{flex-direction:row;max-width:640px}.cta .knopf{flex:1 1 0;font-size:17px}}
+/* Erster Bildschirm muss auf Laptops ganz sichtbar sein */
+.hero .inhalt{padding-top:96px}
+h1{font-size:clamp(40px,min(5.4vw,8.4vh),84px)}
+.lead{font-size:clamp(16px,min(1.5vw,2.4vh),19px)}
+.cta{margin-top:84px}
+/* Lichterkette ausgeblendet (Markus: unverziert, wirkt schlecht); Datei bleibt, neue verzierte Kette folgt */
+.kette{display:none}
+
+/* Weitere Abschnitte */
+.abschnitt{position:relative;padding:clamp(56px,9vw,110px) 0;background:#0E1A14}
+.abschnitt.dunkel{background:#0A0F0C}
+.abschnitt h2{font-family:"Great Vibes",var(--serif);font-weight:400;font-size:clamp(46px,6vw,78px);line-height:1.05;margin:0 0 10px;background:linear-gradient(180deg,#FFE7A8,#E8B14A 50%,#B9832A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.abschnitt .einleitung{max-width:36em;color:#d9ddd9;margin:0 0 34px}
+.kugeln{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px)}
+.kugel-karte{text-align:center}
+.kugel-karte .bild{position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden}
+.kugel-karte .bild>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.kugel-karte .bild .prod{inset:auto;left:50%;top:62%;width:36%;height:36%;transform:translate(-50%,-50%);object-fit:contain;filter:drop-shadow(0 3px 5px rgba(0,0,0,.45))}
+.kugel-karte b{display:block;margin-top:14px;font-size:18px}
+.kugel-karte span{display:block;color:#E8B14A;font-weight:700}
+.kugel-karte small{color:#9aa49d;font-size:13px}
+.buehne-bild{position:relative;border-radius:22px;overflow:hidden}
+.buehne-bild img{display:block;width:100%;height:auto}
+.budget{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.budget a{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:1.5px solid rgba(232,177,74,.7);color:#fff;text-decoration:none;font-weight:700}
+.budget a:hover{background:rgba(232,177,74,.18)}
+.advent{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(24px,4vw,60px);align-items:center}
+.advent .buehne-bild .prod{position:absolute;width:7%;height:auto}
+.schritte{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,3vw,36px);counter-reset:s;list-style:none;padding:0;margin:0}
+.schritte li{counter-increment:s;padding-top:18px;border-top:1px solid rgba(232,177,74,.35);color:#d9ddd9}
+.schritte li::before{content:counter(s);display:block;font-family:"Great Vibes",var(--serif);font-size:44px;color:#E8B14A;line-height:1;margin-bottom:6px}
+.schritte b{color:#fff}
+footer.fuss{background:#070a08;padding:34px 0 46px;color:#8f9891;font-size:14px}
+footer.fuss a{color:#c9cfca}
+@media (max-width:700px){.kugeln{grid-template-columns:1fr;max-width:340px;margin:0 auto}.advent{grid-template-columns:1fr}.schritte{grid-template-columns:1fr}}
+.platz{position:absolute;top:50%;width:14%;transform:translate(-50%,-50%);text-align:center;color:#fff;font-size:clamp(11px,1vw,14px);line-height:1.3}
+.platz img{width:100%;height:auto;max-height:13vw;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.55))}
+.platz b{display:block;color:#E8B14A;font-size:1.15em}
+@media (max-width:700px){.platz{display:none}}
+/* Verschneiter Tannenzweig mit Samtschleife liegt auf der rechten Ecke des WhatsApp-Knopfs (Foto, freigestellt) */
+.knopf.wa{overflow:visible}
+.knopf.wa .zweig{position:absolute;right:-16px;bottom:calc(100% - 9px);top:auto;width:230px;height:auto;pointer-events:none;filter:drop-shadow(0 5px 7px rgba(0,0,0,.5))}
+.cta{margin-top:58px}
+@media (max-width:700px){.knopf.wa .zweig{width:200px;right:-4px}.cta{margin-top:46px}}
+/* Knopf-Deko (Markus 18.10. „super“): Reisig-Kranz rundherum mit blinkender bunter Lichterkette, Zuckerstangen-Streifen im Knopf.
+   Zweig und Schneehauben nur ausgeblendet (Dateien bleiben). Kranz baut das Skript unten. */
+.knopf.wa .zweig{display:none}
+.knopf::before,.knopf.wa::before{display:none}
+.cta{gap:30px;margin-top:40px}
+.cta .knopf{overflow:visible;background-image:repeating-linear-gradient(-45deg,rgba(255,255,255,.18) 0 11px,rgba(255,255,255,0) 11px 22px)}
+.kranz{position:absolute;left:-12px;top:-12px;pointer-events:none;z-index:2}
+.kranz .nadel{position:absolute;width:2.4px;height:11px;border-radius:2px;transform-origin:50% 100%}
+.kranz .birne{position:absolute;width:8px;height:11px;border-radius:50% 50% 45% 45%;margin:-5px 0 0 -4px;animation:blinken 1.6s infinite;z-index:3}
+.kranz .birne::before{content:"";position:absolute;left:2px;top:-3px;width:4px;height:4px;background:#2b3a2b;border-radius:1px}
+@keyframes blinken{0%,100%{opacity:1;box-shadow:0 0 8px 2px currentColor}50%{opacity:.4;box-shadow:none}}
+@media (prefers-reduced-motion:reduce){.kranz .birne{animation:none;box-shadow:0 0 6px 1px currentColor}}
+</style>
 </head>
-<body class="xmas">
-<div class="lichter" aria-hidden="true"></div>
-<main>
-<a class="marke" href="/" aria-label="CHEAPER Media, Startseite"><span class="wm" role="img" aria-label="CHEAPER Media"><b aria-hidden="true">Cheaper</b><i aria-hidden="true">Media</i></span></a>
-<header class="buehne">
-  <div class="kopfbild" role="img" aria-label="Leuchtender Weihnachtsbaum mit Geschenken auf dunkelgrünem Hintergrund"></div>
-  <p class="ki-hinweis">Bild: KI-generiert</p>
-  <h1>CHEAPER XMAS <span class="unter">Geschenke-Deal Radar</span></h1>
-  <p class="spruch">Christkind und Weihnachtsmann kaufen günstig ein.</p>
-  <p class="spruch2">Wir suchen. Wir finden. Du schenkst.</p>
+<body>
+<header class="kopf">
+  <div class="wrap">
+    <a href="#" aria-label="CHEAPER XMAS, Startseite"><span class="wm" role="img" aria-label="CHEAPER XMAS"><b aria-hidden="true">Cheaper</b><i aria-hidden="true">Xmas</i></span></a>
+    <nav aria-label="Kurzwahl"><a href="#kanal">Zum Kanal ↓</a></nav>
+  </div>
 </header>
-<p class="hinweis">Der Kanal wird gerade vorbereitet. Die Links zu WhatsApp und Telegram stehen hier, sobald er läuft.</p>
+<main>
+<section class="hero" aria-label="CHEAPER XMAS">
+  <div class="film" aria-hidden="true">
+    <div class="ebene aussen"><img alt="" data-quer="baum2-quer.webp" data-hoch="baum2-hoch.webp"></div>
+    <div class="schleier"></div>
+    <div class="waerme"></div>
+    <img class="kette" src="lichterkette.webp" alt="">
+    <canvas id="schnee"></canvas>
+  </div>
+  <div class="lupe" aria-hidden="true"><div class="griff"></div><div class="glas"><div class="innen"><div class="ebene drin"><img alt="" data-quer="glas2-quer.webp" data-hoch="glas2-hoch.webp"></div></div></div></div>
+  <div class="unter leer" aria-live="polite"><small>Unter der Lupe (Beispiel)</small><b></b><span></span></div>
+  <p class="ki">Hintergrund und Deko: KI-generiert. Produktfotos: von den Shops.</p>
 
-<h2>Was du bei uns findest</h2>
-<ul class="gruppen">
-  <li><b>Spielzeug</b><span>ab 5 Jahren, Klemmbausteine, Spiele</span></li>
-  <li><b>Adventskalender</b><span>LEGO, Spielzeug, Beauty</span></li>
-  <li><b>Deko und Licht</b><span>Baumschmuck, Lichterketten, Bäume</span></li>
-  <li><b>Gemütlich</b><span>Decken, Kerzen, Weihnachtspyjamas</span></li>
-  <li><b>Küche und Tisch</b><span>Tassen, Backformen, Tischdeko</span></li>
-  <li><b>Technik</b><span>Kopfhörer, Gaming, Lautsprecher</span></li>
-</ul>
+  <div class="wrap inhalt">
+    <div class="text">
+      <span class="eyebrow">Geschenke-Deals für Österreich und Deutschland</span>
+      <p class="kein-shop"><b>Kein Shop.</b> Ein kostenloser WhatsApp-Kanal.</p>
+      <h1>Wir suchen.<br>Wir finden.<br><em>Du schenkst.</em></h1>
+      <p class="lead">Schau durch die Lupe: In den Kugeln und Geschenken stecken Angebote. Jeden Tag <b>geprüfte Geschenke-Deals</b> direkt in dein WhatsApp oder Telegram. Du kaufst wie immer im Shop.</p>
+      <div class="cta" id="kanal">
+        <a class="knopf wa" href="https://whatsapp.com/channel/0029VbDv8AgE50UcDPygSx14" rel="noopener"><span class="marke-kreis wa-kreis"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm-3.2 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.4z"/></svg></span>WhatsApp-Kanal folgen<img class="zweig" src="deko-zweig-oben.webp" alt=""></a>
+        <a class="knopf tg" href="https://t.me/cheaperxmas" rel="noopener"><span class="marke-kreis tg-kreis"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M21.6 3.3 2.9 10.5c-1.1.4-1.1 1.1-.2 1.4l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.5 0 .7-.2 1-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.2-1.7zM8.4 13.1l9.9-6.3c.5-.3.9-.1.6.2L10.5 14.6l-.3 3.6-1.8-5.1z"/></svg></span>Telegram-Kanal folgen</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>Was ist das?</h2>
-<p>CHEAPER XMAS ist ein kostenloser Kanal auf WhatsApp und Telegram. Er richtet sich an Erwachsene, die schenken, vor allem an Eltern und Großeltern in Österreich und Deutschland. Wir zeigen Geschenke und Weihnachtsartikel, die gerade wirklich günstig sind: Spielzeug ab 5 Jahren, Klemmbausteine, Adventskalender, Weihnachtsdeko, Beleuchtung, Weihnachtskleidung, Küche und Backen, Bücher und Spiele, Technik und mehr. Lebensmittel zeigen wir nicht.</p>
+<section class="abschnitt" id="unter-der-lupe">
+  <div class="wrap">
+    <h2>Unter der Lupe</h2>
+    <p class="einleitung">Was wir in den Kugeln gefunden haben. Jeder Preis wird gegen andere Shops geprüft, nicht gegen einen durchgestrichenen Fantasiepreis.</p>
+    <div class="kugeln">
+      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt=""><img class="prod" src="produkte/b2.webp" alt="LEGO Weihnachtsbaum"></div><b>LEGO Weihnachtsbaum (40573)</b><span>42,95 € bei BRICKMO</span><small>Beispiel, Preis vom 15.10.2026</small></div>
+      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt=""><img class="prod" src="produkte/b6.webp" alt="LEGO Mini-Orchidee"></div><b>LEGO Mini-Orchidee (10343)</b><span>17,99 € bei BAUR</span><small>Beispiel, Preis vom 15.10.2026</small></div>
+      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt=""><img class="prod" src="produkte/k1.webp" alt="Weihnachtspyramide"></div><b>Konstsmide Weihnachtspyramide</b><span>79,99 € bei hagebau</span><small>Beispiel, Preis vom 15.10.2026</small></div>
+    </div>
+  </div>
+</section>
 
-<h2>So wählen wir aus</h2>
-<ul>
-  <li>Wir prüfen jeden Preis gegen einen zweiten Händler oder gegen den niedrigsten Preis der letzten 30 Tage. Ein Rabatt, der nur gegen die unverbindliche Preisempfehlung des Herstellers gerechnet ist, zählt bei uns nicht.</li>
-  <li>Wir prüfen, ob der Shop nach Österreich und Deutschland liefert. Liefert ein Shop nur in ein Land, steht das im Beitrag.</li>
-  <li>Spielzeug mit einer Altersangabe unter 5 Jahren zeigen wir nicht. Bei Spielzeug steht das Mindestalter im Beitrag, wenn der Shop es nennt.</li>
-  <li>Wir zeigen Angebote von Händlern mit Impressum aus der EU oder von bekannten Shops. Unbekannte Marktplatz-Händler aus Drittländern lassen wir weg.</li>
-</ul>
+<section class="abschnitt dunkel" id="gabentisch">
+  <div class="wrap">
+    <h2>Der Gabentisch</h2>
+    <p class="einleitung">Geschenke nach Budget. Wähle, wie viel du ausgeben willst, wir zeigen dir die besten geprüften Deals dazu.</p>
+    <div class="buehne-bild">
+      <picture><source media="(max-width:700px)" srcset="gabentisch-hoch.webp"><img src="gabentisch-quer.webp" alt="Gabentisch von oben mit verpackten Geschenken"></picture>
+      <div class="platz" style="left:32%"><img src="produkte/b9.webp" alt=""><span><b>bis 20 €</b>LEGO Sommerstrauß 17,99 €</span></div>
+      <div class="platz" style="left:50%"><img src="produkte/b4.webp" alt=""><span><b>bis 50 €</b>LEGO Weihnachtsgesteck 31,50 €</span></div>
+      <div class="platz" style="left:68%"><img src="produkte/k1.webp" alt=""><span><b>bis 100 €</b>Weihnachtspyramide 79,99 €</span></div>
+    </div>
+    <div class="budget"><a href="#kanal">bis 20 €</a><a href="#kanal">bis 50 €</a><a href="#kanal">bis 100 €</a><a href="#kanal">über 100 €</a></div>
+  </div>
+</section>
 
-<h2>Was wir nicht sind</h2>
-<p>Wir sind kein Gutscheinportal, kein Cashback-Dienst und kein Preisvergleichsportal. Wir verkaufen nichts und nehmen keine Bestellungen an. Gekauft wird immer im Shop.</p>
+<section class="abschnitt" id="advent">
+  <div class="wrap advent">
+    <div class="buehne-bild"><img src="advent-quer.webp" alt="Adventkalender aus dunkelgrünem Holz, ein Türchen offen"></div>
+    <div>
+      <h2>Der Adventkalender</h2>
+      <p class="einleitung">Geplant ab 1. Dezember: Hinter jedem Türchen steckt ein geprüfter Geschenk-Deal. Folge dem Kanal, dann verpasst du keinen.</p>
+    </div>
+  </div>
+</section>
 
-<h2>Kennzeichnung</h2>
-<p>Beiträge mit einem Partnerlink beginnen mit der Zeile „Anzeige“. Kaufst du darüber, bekommen wir vielleicht eine kleine Provision. Am Preis ändert das für dich nichts. Ein guter Preis ist uns wichtiger als eine hohe Provision.</p>
-
-<h2>Wie ein Beitrag aussieht</h2>
-<p>Die folgenden Beispiele sind erfunden und zeigen nur den Aufbau.</p>
-<div class="post"><span class="ad">Anzeige</span>
-🧱 <strong>Klemmbaustein-Set Feuerwehrstation (Beispiel)</strong>
-<strong>39,99 €</strong> bei Beispiel-Shop
-🔥 Sonst meist um 50 €, <strong>20 % günstiger</strong>
-Ab 6 Jahren
-zzgl. eventueller Versandkosten
-
-https://cheapermedia.at/xmas/beispiel</div>
-<div class="post">💡 <strong>LED-Lichterkette 200 LEDs, warmweiß (Beispiel)</strong>
-<strong>14,99 €</strong> bei Beispiel-Markt
-🔥 Niedrigster Preis der letzten 30 Tage: 25 €, jetzt <strong>40 % darunter</strong>
-📦 Liefert nur nach Österreich
-zzgl. eventueller Versandkosten
-
-https://cheapermedia.at/xmas/beispiel</div>
-
-<h2>Kinder</h2>
-<p>Unsere Beiträge richten sich an Erwachsene. Wir sprechen Kinder nie direkt an und fordern sie nicht zum Kauf auf. Der Kanal ist nicht für Kinder gedacht.</p>
-
-<h2>Wo wir veröffentlichen</h2>
-<p>WhatsApp-Kanal und Telegram-Kanal von CHEAPER XMAS. Wir posten voraussichtlich täglich in mehreren Runden, die Menge hängt davon ab, wie viele geprüfte Angebote es gibt. Wir starten, sobald genug geprüfte Angebote da sind.</p>
-<p>Kontakt: <a href="mailto:info@cheapermedia.at">info@cheapermedia.at</a></p>
-
-<footer><a href="/">CHEAPER Media</a> · <a href="../impressum/">Impressum</a> · <a href="../offenlegung/">Offenlegung</a> · <a href="../datenschutz/">Datenschutz</a></footer>
+<section class="abschnitt dunkel" id="pruefen">
+  <div class="wrap">
+    <h2>So prüfen wir</h2>
+    <ol class="schritte">
+      <li><b>Wir lesen jeden Tag die Shops:</b> Preis, Lieferland und bei Spielzeug die Altersangabe.</li>
+      <li><b>Wir vergleichen mit anderen Shops</b> oder dem tiefsten Preis der letzten 30 Tage. Ein Rabatt nur gegen den alten Preis zählt nicht.</li>
+      <li><b>Nur was wirklich günstig ist, kommt in den Kanal.</b> Gekauft wird wie immer im Shop.</li>
+    </ol>
+  </div>
+</section>
 </main>
+<footer class="fuss"><div class="wrap">Mit * gekennzeichnete Links können Werbelinks sein: Kaufst du darüber, bekommen wir vielleicht eine kleine Provision, am Preis ändert sich nichts. · <a href="https://cheapermedia.at/impressum/">Impressum</a> · <a href="https://cheapermedia.at/datenschutz/">Datenschutz</a></div></footer>
+<script>
+(function(){
+  /* Produkte (Beispiele aus dem Leselauf 15.10.; später setzt das Programm die aktuellen Deals ein).
+     Lagen in Bruchteilen des Szenenbilds: x, y = Mitte; d = Kugeldurchmesser bzw. Schachtelbreite (Anteil der Bildbreite). */
+  var PRODUKTE = [
+    {bild:'b2', name:'LEGO Weihnachtsbaum (40573)', preis:'42,95 € bei BRICKMO'},
+    {bild:'b1', name:'NÄVE Metallstern, 25 cm', preis:'42,99 € bei hagebau'},
+    {bild:'b3', name:'LEGO Weihnachtselfen-Szene (40564)', preis:'39,95 € bei BRICKMO'},
+    {bild:'b4', name:'LEGO Weihnachtsgesteck (40743)', preis:'31,50 € bei BRICKMO'},
+    {bild:'b6', name:'LEGO Mini-Orchidee (10343)', preis:'17,99 € bei BAUR'},
+    {bild:'b5', name:'LEGO Lebkuchen AT-AT (40806)', preis:'45,95 € bei BRICKMO'},
+    {bild:'b7', name:'LEGO Harry Potter Adventskalender', preis:'34,95 € bei BRICKMO'},
+    {bild:'b8', name:'LEGO Harry Potter Adventskalender 2025', preis:'34,95 € bei BRICKMO'},
+    {bild:'b9', name:'LEGO Kleiner Sommerstrauß (10347)', preis:'17,99 € bei BAUR'}
+  ];
+  var SCHACHTELN = [
+    {bild:'k1', name:'Konstsmide Weihnachtspyramide', preis:'79,99 € bei hagebau'},
+    {bild:'k3', name:'LEGO Schlitten des Weihnachtsmanns (40499)', preis:'39,50 € bei BRICKMO'},
+    {bild:'k2', name:'Konstsmide LED-Schwibbogen', preis:'54,99 € bei hagebau'}
+  ];
+  var LAGE = {
+    quer:{bw:1920,bh:1071,fx:.72,fy:.5,
+      kugeln:[[.665,.348],[.746,.338],[.799,.333],[.655,.495],[.756,.478],[.816,.477],[.658,.608],[.722,.656],[.758,.633],[.822,.586]],kd:.021,
+      schachteln:[[.615,.752,.067],[.662,.805,.078],[.813,.807,.067]]},
+    hoch:{bw:1080,bh:1935,fx:.5,fy:.55,
+      kugeln:[[.439,.386],[.617,.386],[.439,.502],[.715,.48],[.529,.604],[.362,.604],[.617,.59],[.464,.70],[.529,.73],[.212,.66],[.778,.678]],kd:.05,
+      schachteln:[[.29,.806,.13],[.37,.848,.17],[.735,.85,.14]]}
+  };
+  var ruhig = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero = document.querySelector('.hero'), film = hero.querySelector('.film'), lupe = hero.querySelector('.lupe'), griff = hero.querySelector('.griff'),
+      glas = hero.querySelector('.glas'), innen = hero.querySelector('.innen'), aussen = film.querySelector('.ebene'), drin = innen.querySelector('.ebene'),
+      inhalt = hero.querySelector('.inhalt'), kopf = document.querySelector('header.kopf'), karte = hero.querySelector('.unter'), kopien = [], ziele = [];
+  var w = 0, h = 0, d = 250, bw = 14, k = 2.3, fx = 0, fy = 0, fw = 0, fh = 0, lage = null, form = '', ax = 0, ay = 0, zx = 0, zy = 0, sc = 1,
+      greift = false, aktiv = false, ox = 0, oy = 0, zielNr = 0, zielZeit = 0, loslassTimer = 0, nahe = -1;
+  var schnee2 = document.createElement('canvas'); schnee2.className = 'schnee2'; innen.appendChild(schnee2);
+
+  function produkteSetzen(){
+    drin.querySelectorAll('.kugel,.schachtel').forEach(function(x){ x.remove(); });
+    lage.kugeln.forEach(function(p, i){ var e = document.createElement('div'), pr = PRODUKTE[i % PRODUKTE.length]; e.className = 'kugel';
+      e.style.cssText = 'left:' + ((p[0] - lage.kd / 2) * 100) + '%;top:calc(' + (p[1] * 100) + '% - ' + (lage.kd / 2 * 100 * lage.bw / lage.bh) + '%);width:' + (lage.kd * 100) + '%;height:' + (lage.kd * 100 * lage.bw / lage.bh) + '%';
+      e.innerHTML = '<img alt="" src="produkte/' + pr.bild + '.webp">'; drin.appendChild(e); });
+    lage.schachteln.forEach(function(p, i){ var e = document.createElement('div'), pr = SCHACHTELN[i]; e.className = 'schachtel'; var hh = p[2] * .8 * lage.bw / lage.bh;
+      e.style.cssText = 'left:' + ((p[0] - p[2] * .31) * 100) + '%;top:' + ((p[1] + .006 - hh) * 100) + '%;width:' + (p[2] * 62) + '%;height:' + (hh * 100) + '%';
+      e.innerHTML = '<img alt="" src="produkte/' + pr.bild + '.webp">'; drin.appendChild(e); });
+  }
+  function klon(el){ var r = hero.getBoundingClientRect(), i = el.getBoundingClientRect(), x = el.cloneNode(true); x.setAttribute('aria-hidden','true');
+    x.querySelectorAll('a').forEach(function(a){ a.removeAttribute('href'); a.tabIndex = -1; });
+    var c = x.querySelector('.cta'); if (c) c.remove(); x.removeAttribute('id');
+    x.style.cssText = 'position:absolute;z-index:4;left:' + (i.left - r.left) + 'px;top:' + (i.top - r.top) + 'px;width:' + i.width + 'px;'; innen.appendChild(x); return x; }
+  /* Lichterkette, Schleier und Wärme auch im Glas, damit die Lupe alles darunter vergrößert */
+  function ueberlagerung(el){ var r = hero.getBoundingClientRect(), f = film.getBoundingClientRect(), x = el.cloneNode(true);
+    var hlp = document.createElement('div'); hlp.style.cssText = 'position:absolute;pointer-events:none;left:' + (f.left - r.left) + 'px;top:' + (f.top - r.top) + 'px;width:' + f.width + 'px;height:' + f.height + 'px';
+    hlp.appendChild(x); innen.insertBefore(hlp, schnee2); return hlp; }
+  function mass(){
+    var neu = innerWidth <= 700 ? 'hoch' : 'quer';
+    if (neu !== form){ form = neu; lage = LAGE[form]; aussen.querySelector('img').src = aussen.querySelector('img').dataset[form]; drin.querySelector('img').src = drin.querySelector('img').dataset[form]; produkteSetzen(); }
+    var r = hero.getBoundingClientRect(), f = film.getBoundingClientRect(); w = r.width; h = r.height; fx = f.left - r.left; fy = f.top - r.top; fw = f.width; fh = f.height;
+    d = lupe.offsetWidth || d; bw = parseFloat(getComputedStyle(glas).borderTopWidth) || bw; k = parseFloat(getComputedStyle(hero).getPropertyValue('--k')) || k;
+    /* Szenenbild deckend (wie object-fit:cover) mit Bildmitte fx/fy, beide Ebenen gleich */
+    var s = Math.max(fw / lage.bw, fh / lage.bh), iw = lage.bw * s, ih = lage.bh * s, ix = (fw - iw) * lage.fx, iy = (fh - ih) * lage.fy;
+    var st = 'width:' + iw + 'px;height:' + ih + 'px;left:' + ix + 'px;top:' + iy + 'px';
+    aussen.style.cssText = st; drin.style.cssText = 'width:' + iw + 'px;height:' + ih + 'px;left:' + (fx + ix) + 'px;top:' + (fy + iy) + 'px';
+    innen.style.width = w + 'px'; innen.style.height = h + 'px';
+    schnee2.style.cssText = 'position:absolute;z-index:3;pointer-events:none;left:' + fx + 'px;top:' + fy + 'px;width:' + fw + 'px;height:' + fh + 'px';
+    kopien.forEach(function(x){ x.remove(); });
+    kopien = ['.schleier', '.waerme', '.kette'].map(function(s){ return ueberlagerung(film.querySelector(s)); }).concat([klon(inhalt), klon(kopf)]);
+    ziele = lage.kugeln.map(function(p){ return [fx + ix + p[0] * iw, fy + iy + p[1] * ih]; })
+      .concat(lage.schachteln.map(function(p){ return [fx + ix + p[0] * iw, fy + iy + (p[1] - p[2] * .5 * lage.bw / lage.bh) * ih]; }));
+  }
+  function setz(){ var c = (d - 2 * bw) / 2;
+    lupe.style.transform = 'translate3d(' + (ax - d / 2).toFixed(1) + 'px,' + (ay - d / 2).toFixed(1) + 'px,0) scale(' + sc.toFixed(3) + ')';
+    innen.style.transform = 'translate3d(' + (c - ax * k).toFixed(1) + 'px,' + (c - ay * k).toFixed(1) + 'px,0) scale(' + k + ')'; }
+  function karteZeigen(){ var best = -1, bd = 1e9;
+    ziele.forEach(function(z, i){ var q = Math.hypot(z[0] - ax, z[1] - ay); if (q < bd){ bd = q; best = i; } });
+    if (bd > d * .35) best = -1;
+    if (best === nahe) return; nahe = best;
+    if (best < 0){ karte.classList.add('leer'); return; }
+    var n = lage.kugeln.length, pr = best < n ? PRODUKTE[best % PRODUKTE.length] : SCHACHTELN[best - n];
+    karte.querySelector('b').textContent = pr.name; karte.querySelector('span').textContent = pr.preis; karte.classList.remove('leer'); }
+  function tick(t){
+    if (!aktiv){ if (t - zielZeit > 2600){ zielZeit = t; zielNr = (zielNr + 1) % ziele.length; } zx = ziele[zielNr][0]; zy = ziele[zielNr][1]; }
+    var f = greift ? .35 : (aktiv ? .2 : .045); ax += (zx - ax) * f; ay += (zy - ay) * f; sc += ((aktiv ? 1.06 : 1) - sc) * .1; setz(); karteZeigen(); requestAnimationFrame(tick); }
+  function start(){ if (kopf.parentNode !== hero) hero.insertBefore(kopf, hero.firstChild); /* Kopfzeile in die Bühne, damit die Lupe auch über das Logo fahren kann */ mass(); zielNr = 1; zx = ziele[zielNr][0]; zy = ziele[zielNr][1]; ax = zx; ay = zy; setz(); karteZeigen();
+    if (!ruhig) requestAnimationFrame(tick); }
+  addEventListener('resize', function(){ mass(); if (ruhig){ ax = ziele[zielNr][0]; ay = ziele[zielNr][1]; setz(); karteZeigen(); } });
+  if (document.readyState === 'complete') start(); else addEventListener('load', start);
+  function los(){ clearTimeout(loslassTimer); loslassTimer = setTimeout(function(){ aktiv = false; zielZeit = performance.now(); }, 2500); }
+  griff.addEventListener('pointerdown', function(e){ var r = hero.getBoundingClientRect(); greift = true; aktiv = true; clearTimeout(loslassTimer);
+    ox = (e.clientX - r.left) - ax; oy = (e.clientY - r.top) - ay; lupe.classList.add('greift'); try { griff.setPointerCapture(e.pointerId); } catch (x) {} e.preventDefault(); });
+  griff.addEventListener('pointermove', function(e){ if (!greift) return; var r = hero.getBoundingClientRect();
+    zx = Math.min(Math.max(e.clientX - r.left - ox, 0), w); zy = Math.min(Math.max(e.clientY - r.top - oy, 0), h);
+    if (ruhig){ ax = zx; ay = zy; setz(); karteZeigen(); } });
+  function loslassen(){ if (!greift) return; greift = false; lupe.classList.remove('greift'); los(); }
+  griff.addEventListener('pointerup', loslassen); griff.addEventListener('pointercancel', loslassen);
+  /* Am PC folgt die Lupe der Maus: wo man drüberfährt, wird vergrößert */
+  hero.addEventListener('pointermove', function(e){ if (e.pointerType !== 'mouse' || greift) return; var r = hero.getBoundingClientRect();
+    aktiv = true; clearTimeout(loslassTimer);
+    zx = Math.min(Math.max(e.clientX - r.left, 0), w); zy = Math.min(Math.max(e.clientY - r.top, 0), h);
+    if (ruhig){ ax = zx; ay = zy; setz(); karteZeigen(); } });
+  hero.addEventListener('pointerleave', function(e){ if (e.pointerType === 'mouse' && !greift) los(); });
+})();
+
+/* Leiser Schneefall (aus, wenn weniger Bewegung gewünscht) */
+(function(){
+  var c = document.getElementById('schnee'); if (!c || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var x = c.getContext('2d'), flocken = [], w = 0, h = 0, dpr = Math.min(devicePixelRatio || 1, 2);
+  var c2 = document.querySelector('.schnee2'), x2 = c2 && c2.getContext('2d'); /* derselbe Schnee im Glas der Lupe */
+  function gross(){ w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; x.setTransform(dpr,0,0,dpr,0,0);
+    if (x2){ c2.width = w * dpr * 2; c2.height = h * dpr * 2; x2.setTransform(dpr * 2,0,0,dpr * 2,0,0); }
+    var n = Math.round(w * h / 9000); flocken = []; for (var i = 0; i < n; i++) flocken.push({x:Math.random()*w, y:Math.random()*h, r:.6+Math.random()*2.2, v:.25+Math.random()*.6, p:Math.random()*6.28}); }
+  function bild(){ x.clearRect(0,0,w,h); x.fillStyle = 'rgba(255,255,255,.75)';
+    flocken.forEach(function(f){ f.y += f.v; f.p += .01; f.x += Math.sin(f.p) * .3; if (f.y > h + 4){ f.y = -4; f.x = Math.random()*w; }
+      x.globalAlpha = .35 + f.r / 4; x.beginPath(); x.arc(f.x, f.y, f.r, 0, 6.283); x.fill(); });
+    if (x2){ x2.clearRect(0,0,w,h); x2.fillStyle = 'rgba(255,255,255,.75)';
+      flocken.forEach(function(f){ x2.globalAlpha = .35 + f.r / 4; x2.beginPath(); x2.arc(f.x, f.y, f.r, 0, 6.283); x2.fill(); }); }
+    requestAnimationFrame(bild); }
+  gross(); addEventListener('resize', gross); requestAnimationFrame(bild);
+})();
+</script>
+<script>
+/* Reisig-Kranz mit Lichterkette um die Messenger-Knöpfe */
+(function(){
+  var GRUEN = ['#0f3d22','#165a30','#1e6e3a','#2c8048','#123b25'], FARBEN = ['#ff3b3b','#ffd23f','#3bd16f','#3fa9ff','#ff8a3d'];
+  function punkt(W, H, t){ var R = H / 2, g = W - 2 * R, u = 2 * g + 2 * Math.PI * R; t = ((t % u) + u) % u;
+    if (t < g) return [R + t, 0, -Math.PI / 2];
+    if (t < g + Math.PI * R){ var a = (t - g) / R - Math.PI / 2; return [W - R + R * Math.cos(a), R + R * Math.sin(a), a]; }
+    if (t < 2 * g + Math.PI * R) return [W - R - (t - g - Math.PI * R), H, Math.PI / 2];
+    var b = (t - 2 * g - Math.PI * R) / R + Math.PI / 2; return [R + R * Math.cos(b), R + R * Math.sin(b), b]; }
+  function bauen(){
+    document.querySelectorAll('.cta .knopf').forEach(function(k){
+      var alt = k.querySelector('.kranz'); if (alt) alt.remove();
+      var W = k.offsetWidth + 24, H = k.offsetHeight + 24, iw = W - 12, ih = H - 12, R = ih / 2, u = 2 * (iw - 2 * R) + 2 * Math.PI * R;
+      var z = document.createElement('div'); z.className = 'kranz'; z.setAttribute('aria-hidden', 'true'); z.style.width = W + 'px'; z.style.height = H + 'px';
+      for (var t = 0; t < u; t += 2.2) for (var j = 0; j < 3; j++){ var p = punkt(iw, ih, t), n = document.createElement('span');
+        n.className = 'nadel'; n.style.cssText = 'left:' + (p[0] + 4.8) + 'px;top:' + (p[1] - 5) + 'px;background:' + GRUEN[(Math.random() * 5) | 0] + ';transform:rotate(' + (p[2] * 180 / Math.PI + 90 + Math.random() * 160 - 80) + 'deg)'; z.appendChild(n); }
+      var nb = Math.round(u / 30);
+      for (var i = 0; i < nb; i++){ var q = punkt(iw, ih, i / nb * u), l = document.createElement('span'), f = FARBEN[i % 5];
+        l.className = 'birne'; l.style.cssText = 'left:' + (q[0] + 6) + 'px;top:' + (q[1] + 6) + 'px;background:' + f + ';color:' + f + ';animation-delay:' + (i % 2 ? '.8s' : '0s'); z.appendChild(l); }
+      k.appendChild(z);
+    });
+  }
+  var timer = 0;
+  if (document.readyState === 'complete') bauen(); else addEventListener('load', bauen);
+  addEventListener('resize', function(){ clearTimeout(timer); timer = setTimeout(bauen, 150); });
+  /* neu bauen, sobald sich die Knopfgröße ändert (z. B. wenn die Schrift fertig geladen ist) */
+  if (window.ResizeObserver){ var ro = new ResizeObserver(function(){ clearTimeout(timer); timer = setTimeout(bauen, 80); }); document.querySelectorAll('.cta .knopf').forEach(function(k){ ro.observe(k); }); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(bauen);
+})();
+</script>
 </body>
 </html>
