@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CHEAPER XMAS – Geschenke-Deals für Österreich und Deutschland</title>
 <meta name="description" content="Jeden Tag geprüfte Geschenke-Deals für Österreich und Deutschland, kostenlos im WhatsApp- und Telegram-Kanal. Kein Shop: Du kaufst wie immer beim Händler.">
+<link rel="preload" as="image" href="baum2-hoch-handy.webp" media="(max-width:700px)" fetchpriority="high">
+<link rel="preload" as="image" href="baum2-quer.webp" media="(min-width:701px)" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
@@ -165,7 +167,7 @@ h1 em{font-family:"Great Vibes",var(--serif);font-style:normal;font-size:1.32em;
 h1{font-size:clamp(40px,min(5.4vw,8.4vh),84px)}
 .lead{font-size:clamp(16px,min(1.5vw,2.4vh),19px)}
 .cta{margin-top:84px}
-/* Lichterkette ausgeblendet (Markus: unverziert, wirkt schlecht); Datei bleibt, neue verzierte Kette folgt */
+/* Lichterkette ausgeblendet (Markus: unverziert, wirkt schlecht); Datei bleibt, neue verzierte Kette folgt. Ausgeblendete Bilder (Kette, Zweig) nur mit data-src, damit sie nicht geladen werden (19.10.) */
 .kette{display:none}
 
 /* Weitere Abschnitte */
@@ -216,6 +218,25 @@ footer.fuss a{color:#c9cfca}
 .kranz .birne::before{content:"";position:absolute;left:2px;top:-3px;width:4px;height:4px;background:#2b3a2b;border-radius:1px}
 @keyframes blinken{0%,100%{opacity:1;box-shadow:0 0 8px 2px currentColor}50%{opacity:.4;box-shadow:none}}
 @media (prefers-reduced-motion:reduce){.kranz .birne{animation:none;box-shadow:0 0 6px 1px currentColor}}
+.kranz canvas{position:absolute;left:-14px;top:-14px;pointer-events:none}
+/* Handy (Markus 19.10.): Knöpfe müssen im ersten Bildschirm stehen. Baum füllt den Rest des Bildschirms,
+   --unten (Höhe von Text + Knöpfen) misst das Skript; der Einleitungstext rückt unter die Knöpfe. */
+@media (max-width:700px){
+  .hero{display:flex;flex-direction:column;align-items:stretch;min-height:0}
+  .hero .film{height:calc(100svh - var(--unten,360px));min-height:250px;max-height:640px;flex:none}
+  .hero .inhalt{margin-top:-34px;padding-top:0;padding-bottom:30px}
+  .text{display:flex;flex-direction:column}
+  .kein-shop{font-size:14px;margin:0 0 2px}
+  h1{font-size:clamp(30px,9.4vw,40px);margin:2px 0 0}
+  .cta{order:3;margin-top:30px;gap:26px}
+  .lead{order:4;margin:26px 0 0}
+  .knopf{min-height:58px}
+  .knopf.wa,.knopf.tg{min-height:58px;font-size:18px}
+  .unter{top:calc(min(max(100svh - var(--unten,360px),250px),640px) - 112px)}
+  .ki{top:auto;bottom:6px;font-size:10.5px}
+  .kranz .birne{animation-name:blinken-leicht;box-shadow:0 0 8px 2px currentColor;will-change:opacity}
+}
+@keyframes blinken-leicht{0%,100%{opacity:1}50%{opacity:.4}}
 </style>
 </head>
 <body>
@@ -228,10 +249,10 @@ footer.fuss a{color:#c9cfca}
 <main>
 <section class="hero" aria-label="CHEAPER XMAS">
   <div class="film" aria-hidden="true">
-    <div class="ebene aussen"><img alt="" data-quer="baum2-quer.webp" data-hoch="baum2-hoch.webp"></div>
+    <div class="ebene aussen"><img alt="" data-quer="baum2-quer.webp" data-hoch="baum2-hoch-handy.webp" fetchpriority="high"></div>
     <div class="schleier"></div>
     <div class="waerme"></div>
-    <img class="kette" src="lichterkette.webp" alt="">
+    <img class="kette" data-src="lichterkette.webp" alt="">
     <canvas id="schnee"></canvas>
   </div>
   <div class="lupe" aria-hidden="true"><div class="griff"></div><div class="glas"><div class="innen"><div class="ebene drin"><img alt="" data-quer="glas2-quer.webp" data-hoch="glas2-hoch.webp"></div></div></div></div>
@@ -245,7 +266,7 @@ footer.fuss a{color:#c9cfca}
       <h1>Wir suchen.<br>Wir finden.<br><em>Du schenkst.</em></h1>
       <p class="lead">Schau durch die Lupe: In den Kugeln und Geschenken stecken Angebote. Jeden Tag <b>geprüfte Geschenke-Deals</b> direkt in dein WhatsApp oder Telegram. Du kaufst wie immer im Shop.</p>
       <div class="cta" id="kanal">
-        <a class="knopf wa" href="https://whatsapp.com/channel/0029VbDv8AgE50UcDPygSx14" rel="noopener"><span class="marke-kreis wa-kreis"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm-3.2 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.4z"/></svg></span>WhatsApp-Kanal folgen<img class="zweig" src="deko-zweig-oben.webp" alt=""></a>
+        <a class="knopf wa" href="https://whatsapp.com/channel/0029VbDv8AgE50UcDPygSx14" rel="noopener"><span class="marke-kreis wa-kreis"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 2a8 8 0 1 1-4.1 14.9l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 0 1 12 4zm-3.2 4.3c-.2 0-.5 0-.7.3-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.2 2.4.9 2.9.8 3.4.7.5 0 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3l-2-1c-.3-.1-.5-.1-.7.1-.2.3-.8 1-1 1.2-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5-.9-.8-1.5-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.1c-.2-.6-.5-.5-.7-.5h-.4z"/></svg></span>WhatsApp-Kanal folgen<img class="zweig" data-src="deko-zweig-oben.webp" alt=""></a>
         <a class="knopf tg" href="https://t.me/cheaperxmas" rel="noopener"><span class="marke-kreis tg-kreis"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M21.6 3.3 2.9 10.5c-1.1.4-1.1 1.1-.2 1.4l4.6 1.4 1.8 5.5c.2.6.4.8.9.8.5 0 .7-.2 1-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.9-1.2-1.7zM8.4 13.1l9.9-6.3c.5-.3.9-.1.6.2L10.5 14.6l-.3 3.6-1.8-5.1z"/></svg></span>Telegram-Kanal folgen</a>
       </div>
     </div>
@@ -257,9 +278,9 @@ footer.fuss a{color:#c9cfca}
     <h2>Unter der Lupe</h2>
     <p class="einleitung">Was wir in den Kugeln gefunden haben. Jeder Preis wird gegen andere Shops geprüft, nicht gegen einen durchgestrichenen Fantasiepreis.</p>
     <div class="kugeln">
-      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt=""><img class="prod" src="produkte/b2.webp" alt="LEGO Weihnachtsbaum"></div><b>LEGO Weihnachtsbaum (40573)</b><span>42,95 € bei BRICKMO</span><small>Beispiel, Preis vom 15.10.2026</small></div>
-      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt=""><img class="prod" src="produkte/b6.webp" alt="LEGO Mini-Orchidee"></div><b>LEGO Mini-Orchidee (10343)</b><span>17,99 € bei BAUR</span><small>Beispiel, Preis vom 15.10.2026</small></div>
-      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt=""><img class="prod" src="produkte/k1.webp" alt="Weihnachtspyramide"></div><b>Konstsmide Weihnachtspyramide</b><span>79,99 € bei hagebau</span><small>Beispiel, Preis vom 15.10.2026</small></div>
+      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt="" loading="lazy" decoding="async"><img class="prod" src="produkte/b2.webp" loading="lazy" decoding="async" alt="LEGO Weihnachtsbaum"></div><b>LEGO Weihnachtsbaum (40573)</b><span>42,95 € bei BRICKMO</span><small>Beispiel, Preis vom 15.10.2026</small></div>
+      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt="" loading="lazy" decoding="async"><img class="prod" src="produkte/b6.webp" loading="lazy" decoding="async" alt="LEGO Mini-Orchidee"></div><b>LEGO Mini-Orchidee (10343)</b><span>17,99 € bei BAUR</span><small>Beispiel, Preis vom 15.10.2026</small></div>
+      <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt="" loading="lazy" decoding="async"><img class="prod" src="produkte/k1.webp" loading="lazy" decoding="async" alt="Weihnachtspyramide"></div><b>Konstsmide Weihnachtspyramide</b><span>79,99 € bei hagebau</span><small>Beispiel, Preis vom 15.10.2026</small></div>
     </div>
   </div>
 </section>
@@ -269,10 +290,10 @@ footer.fuss a{color:#c9cfca}
     <h2>Der Gabentisch</h2>
     <p class="einleitung">Geschenke nach Budget. Wähle, wie viel du ausgeben willst, wir zeigen dir die besten geprüften Deals dazu.</p>
     <div class="buehne-bild">
-      <picture><source media="(max-width:700px)" srcset="gabentisch-hoch.webp"><img src="gabentisch-quer.webp" alt="Gabentisch von oben mit verpackten Geschenken"></picture>
-      <div class="platz" style="left:32%"><img src="produkte/b9.webp" alt=""><span><b>bis 20 €</b>LEGO Sommerstrauß 17,99 €</span></div>
-      <div class="platz" style="left:50%"><img src="produkte/b4.webp" alt=""><span><b>bis 50 €</b>LEGO Weihnachtsgesteck 31,50 €</span></div>
-      <div class="platz" style="left:68%"><img src="produkte/k1.webp" alt=""><span><b>bis 100 €</b>Weihnachtspyramide 79,99 €</span></div>
+      <picture><source media="(max-width:700px)" srcset="gabentisch-hoch-handy.webp"><img src="gabentisch-quer.webp" alt="Gabentisch von oben mit verpackten Geschenken" loading="lazy" decoding="async"></picture>
+      <div class="platz" style="left:32%"><img src="produkte/b9.webp" alt="" loading="lazy" decoding="async"><span><b>bis 20 €</b>LEGO Sommerstrauß 17,99 €</span></div>
+      <div class="platz" style="left:50%"><img src="produkte/b4.webp" alt="" loading="lazy" decoding="async"><span><b>bis 50 €</b>LEGO Weihnachtsgesteck 31,50 €</span></div>
+      <div class="platz" style="left:68%"><img src="produkte/k1.webp" alt="" loading="lazy" decoding="async"><span><b>bis 100 €</b>Weihnachtspyramide 79,99 €</span></div>
     </div>
     <div class="budget"><a href="#kanal">bis 20 €</a><a href="#kanal">bis 50 €</a><a href="#kanal">bis 100 €</a><a href="#kanal">über 100 €</a></div>
   </div>
@@ -280,7 +301,7 @@ footer.fuss a{color:#c9cfca}
 
 <section class="abschnitt" id="advent">
   <div class="wrap advent">
-    <div class="buehne-bild"><img src="advent-quer.webp" alt="Adventkalender aus dunkelgrünem Holz, ein Türchen offen"></div>
+    <div class="buehne-bild"><img src="advent-quer.webp" srcset="advent-quer-960.webp 960w, advent-quer.webp 1920w" sizes="(max-width:700px) 92vw, 640px" loading="lazy" decoding="async" alt="Adventkalender aus dunkelgrünem Holz, ein Türchen offen"></div>
     <div>
       <h2>Der Adventkalender</h2>
       <p class="einleitung">Geplant ab 1. Dezember: Hinter jedem Türchen steckt ein geprüfter Geschenk-Deal. Folge dem Kanal, dann verpasst du keinen.</p>
@@ -335,6 +356,12 @@ footer.fuss a{color:#c9cfca}
   var w = 0, h = 0, d = 250, bw = 14, k = 2.3, fx = 0, fy = 0, fw = 0, fh = 0, lage = null, form = '', ax = 0, ay = 0, zx = 0, zy = 0, sc = 1,
       greift = false, aktiv = false, ox = 0, oy = 0, zielNr = 0, zielZeit = 0, loslassTimer = 0, nahe = -1;
   var schnee2 = document.createElement('canvas'); schnee2.className = 'schnee2'; innen.appendChild(schnee2);
+  /* Handy: Höhe von Text + Knöpfen messen, der Baum bekommt den Rest des Bildschirms (CSS --unten) */
+  function unten(){ if (innerWidth > 700){ hero.style.removeProperty('--unten'); return; }
+    var c = inhalt.querySelector('.cta').getBoundingClientRect().bottom - inhalt.getBoundingClientRect().top;
+    hero.style.setProperty('--unten', Math.round(c - 34 + 18) + 'px'); }
+  unten(); aussen.querySelector('img').src = aussen.querySelector('img').dataset[innerWidth <= 700 ? 'hoch' : 'quer']; /* Startbild sofort laden, nicht erst nach allen anderen Bildern */
+  var sichtbar = true; if (window.IntersectionObserver) new IntersectionObserver(function(e){ sichtbar = e[0].isIntersecting; window.__heroSichtbar = sichtbar; }).observe(hero);
 
   function produkteSetzen(){
     drin.querySelectorAll('.kugel,.schachtel').forEach(function(x){ x.remove(); });
@@ -354,7 +381,7 @@ footer.fuss a{color:#c9cfca}
     var hlp = document.createElement('div'); hlp.style.cssText = 'position:absolute;pointer-events:none;left:' + (f.left - r.left) + 'px;top:' + (f.top - r.top) + 'px;width:' + f.width + 'px;height:' + f.height + 'px';
     hlp.appendChild(x); innen.insertBefore(hlp, schnee2); return hlp; }
   function mass(){
-    var neu = innerWidth <= 700 ? 'hoch' : 'quer';
+    unten(); var neu = innerWidth <= 700 ? 'hoch' : 'quer';
     if (neu !== form){ form = neu; lage = LAGE[form]; aussen.querySelector('img').src = aussen.querySelector('img').dataset[form]; drin.querySelector('img').src = drin.querySelector('img').dataset[form]; produkteSetzen(); }
     var r = hero.getBoundingClientRect(), f = film.getBoundingClientRect(); w = r.width; h = r.height; fx = f.left - r.left; fy = f.top - r.top; fw = f.width; fh = f.height;
     d = lupe.offsetWidth || d; bw = parseFloat(getComputedStyle(glas).borderTopWidth) || bw; k = parseFloat(getComputedStyle(hero).getPropertyValue('--k')) || k;
@@ -380,10 +407,12 @@ footer.fuss a{color:#c9cfca}
     var n = lage.kugeln.length, pr = best < n ? PRODUKTE[best % PRODUKTE.length] : SCHACHTELN[best - n];
     karte.querySelector('b').textContent = pr.name; karte.querySelector('span').textContent = pr.preis; karte.classList.remove('leer'); }
   function tick(t){
+    if (!sichtbar){ requestAnimationFrame(tick); return; } /* Bühne nicht im Bild: nichts rechnen */
     if (!aktiv){ if (t - zielZeit > 2600){ zielZeit = t; zielNr = (zielNr + 1) % ziele.length; } zx = ziele[zielNr][0]; zy = ziele[zielNr][1]; }
     var f = greift ? .35 : (aktiv ? .2 : .045); ax += (zx - ax) * f; ay += (zy - ay) * f; sc += ((aktiv ? 1.06 : 1) - sc) * .1; setz(); karteZeigen(); requestAnimationFrame(tick); }
   function start(){ if (kopf.parentNode !== hero) hero.insertBefore(kopf, hero.firstChild); /* Kopfzeile in die Bühne, damit die Lupe auch über das Logo fahren kann */ mass(); zielNr = 1; zx = ziele[zielNr][0]; zy = ziele[zielNr][1]; ax = zx; ay = zy; setz(); karteZeigen();
     if (!ruhig) requestAnimationFrame(tick); }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (ziele.length) mass(); });
   addEventListener('resize', function(){ mass(); if (ruhig){ ax = ziele[zielNr][0]; ay = ziele[zielNr][1]; setz(); karteZeigen(); } });
   if (document.readyState === 'complete') start(); else addEventListener('load', start);
   function los(){ clearTimeout(loslassTimer); loslassTimer = setTimeout(function(){ aktiv = false; zielZeit = performance.now(); }, 2500); }
@@ -410,7 +439,8 @@ footer.fuss a{color:#c9cfca}
   function gross(){ w = c.clientWidth; h = c.clientHeight; c.width = w * dpr; c.height = h * dpr; x.setTransform(dpr,0,0,dpr,0,0);
     if (x2){ c2.width = w * dpr * 2; c2.height = h * dpr * 2; x2.setTransform(dpr * 2,0,0,dpr * 2,0,0); }
     var n = Math.round(w * h / 9000); flocken = []; for (var i = 0; i < n; i++) flocken.push({x:Math.random()*w, y:Math.random()*h, r:.6+Math.random()*2.2, v:.25+Math.random()*.6, p:Math.random()*6.28}); }
-  function bild(){ x.clearRect(0,0,w,h); x.fillStyle = 'rgba(255,255,255,.75)';
+  function bild(){ if (window.__heroSichtbar === false){ requestAnimationFrame(bild); return; }
+    x.clearRect(0,0,w,h); x.fillStyle = 'rgba(255,255,255,.75)';
     flocken.forEach(function(f){ f.y += f.v; f.p += .01; f.x += Math.sin(f.p) * .3; if (f.y > h + 4){ f.y = -4; f.x = Math.random()*w; }
       x.globalAlpha = .35 + f.r / 4; x.beginPath(); x.arc(f.x, f.y, f.r, 0, 6.283); x.fill(); });
     if (x2){ x2.clearRect(0,0,w,h); x2.fillStyle = 'rgba(255,255,255,.75)';
@@ -430,11 +460,17 @@ footer.fuss a{color:#c9cfca}
     var b = (t - 2 * g - Math.PI * R) / R + Math.PI / 2; return [R + R * Math.cos(b), R + R * Math.sin(b), b]; }
   function bauen(){
     document.querySelectorAll('.cta .knopf').forEach(function(k){
-      var alt = k.querySelector('.kranz'); if (alt) alt.remove();
+      var alt = k.querySelector('.kranz'), gr = k.offsetWidth + 'x' + k.offsetHeight; if (alt && k.dataset.kranz === gr) return; k.dataset.kranz = gr; if (alt) alt.remove();
       var W = k.offsetWidth + 24, H = k.offsetHeight + 24, iw = W - 12, ih = H - 12, R = ih / 2, u = 2 * (iw - 2 * R) + 2 * Math.PI * R;
       var z = document.createElement('div'); z.className = 'kranz'; z.setAttribute('aria-hidden', 'true'); z.style.width = W + 'px'; z.style.height = H + 'px';
-      for (var t = 0; t < u; t += 2.2) for (var j = 0; j < 3; j++){ var p = punkt(iw, ih, t), n = document.createElement('span');
-        n.className = 'nadel'; n.style.cssText = 'left:' + (p[0] + 4.8) + 'px;top:' + (p[1] - 5) + 'px;background:' + GRUEN[(Math.random() * 5) | 0] + ';transform:rotate(' + (p[2] * 180 / Math.PI + 90 + Math.random() * 160 - 80) + 'deg)'; z.appendChild(n); }
+      /* Nadeln auf eine Zeichenfläche statt tausender Elemente (gleiches Aussehen, viel schneller) */
+      var cv = document.createElement('canvas'), dpr = Math.min(devicePixelRatio || 1, 3), P = 14, c = cv.getContext('2d');
+      cv.width = (W + 2 * P) * dpr; cv.height = (H + 2 * P) * dpr; cv.style.width = (W + 2 * P) + 'px'; cv.style.height = (H + 2 * P) + 'px';
+      c.setTransform(dpr, 0, 0, dpr, 0, 0);
+      for (var t = 0; t < u; t += 2.2) for (var j = 0; j < 3; j++){ var p = punkt(iw, ih, t), wi = (p[2] * 180 / Math.PI + 90 + Math.random() * 160 - 80) * Math.PI / 180;
+        c.save(); c.translate(P + p[0] + 6, P + p[1] + 6); c.rotate(wi); c.fillStyle = GRUEN[(Math.random() * 5) | 0];
+        c.beginPath(); if (c.roundRect) c.roundRect(-1.2, -11, 2.4, 11, 1.2); else c.rect(-1.2, -11, 2.4, 11); c.fill(); c.restore(); }
+      z.appendChild(cv);
       var nb = Math.round(u / 30);
       for (var i = 0; i < nb; i++){ var q = punkt(iw, ih, i / nb * u), l = document.createElement('span'), f = FARBEN[i % 5];
         l.className = 'birne'; l.style.cssText = 'left:' + (q[0] + 6) + 'px;top:' + (q[1] + 6) + 'px;background:' + f + ';color:' + f + ';animation-delay:' + (i % 2 ? '.8s' : '0s'); z.appendChild(l); }
