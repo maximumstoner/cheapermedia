@@ -7,10 +7,10 @@
 <meta name="description" content="Jeden Tag geprüfte Geschenke-Deals für Österreich und Deutschland, kostenlos im WhatsApp- und Telegram-Kanal. Kein Shop: Du kaufst wie immer beim Händler.">
 <link rel="preload" as="image" href="baum2-hoch-handy.webp" media="(max-width:700px)" fetchpriority="high">
 <link rel="preload" as="image" href="baum2-quer.webp" media="(min-width:701px)" fetchpriority="high">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 @font-face{font-family:"Inter";font-style:normal;font-weight:400 900;font-display:swap;src:url(fonts/inter-latin.woff2) format("woff2")}
+/* Great Vibes (SIL Open Font License) liegt auf unserem Server, nicht mehr bei Google (Datenschutz, Markus 19.10.) */
+@font-face{font-family:"Great Vibes";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/greatvibes-latin.woff2) format("woff2")}
 @font-face{font-family:"DM Serif Display";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/dmserif-italic-latin.woff2) format("woff2")}
 :root{--rot:#E10A1F;--schwarz:#0C0C0C;--tanne:#0D3B2E;--gold:#E8B14A;--soft:#C9C9CE;--wa:#25D366;--tg:#2AABEE;
   --serif:"DM Serif Display",Georgia,serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--max:1180px;--rand:clamp(18px,4vw,40px)}
@@ -219,6 +219,19 @@ footer.fuss a{color:#c9cfca}
 @keyframes blinken{0%,100%{opacity:1;box-shadow:0 0 8px 2px currentColor}50%{opacity:.4;box-shadow:none}}
 @media (prefers-reduced-motion:reduce){.kranz .birne{animation:none;box-shadow:0 0 6px 1px currentColor}}
 .kranz canvas{position:absolute;left:-14px;top:-14px;pointer-events:none}
+/* Markus 19.10. (ChatGPT-Gutachten 1-4): Nutzen-Zeile je Gerät, Hinweis „Lupe ziehen“ nur am Handy, Werbelink-Hinweis im ersten Abschnitt */
+.nur-handy{display:none}
+.hero .zieh{display:none}
+.transparenz{max-width:40em;margin:-18px 0 34px;padding:10px 14px;border-left:3px solid rgba(232,177,74,.7);background:rgba(255,255,255,.04);color:#c9cfca;font-size:14px;line-height:1.5}
+.transparenz b{color:#fff}
+@media (max-width:700px){
+  .nur-pc{display:none}.nur-handy{display:inline}
+  .kein-shop{line-height:1.35}
+  .hero .zieh{display:block;position:absolute;right:62%;top:calc(100% + 2px);white-space:nowrap;padding:4px 10px;border-radius:999px;background:rgba(12,12,12,.78);color:#fff;font-size:12px;font-weight:700;box-shadow:0 2px 8px rgba(0,0,0,.5);transition:opacity .4s}
+  .hero .lupe.gezogen .zieh{opacity:0}
+  .unter{top:calc(min(max(100svh - var(--unten,360px),250px),640px) - 128px)}
+  .unter b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 /* Handy (Markus 19.10.): Knöpfe müssen im ersten Bildschirm stehen. Baum füllt den Rest des Bildschirms,
    --unten (Höhe von Text + Knöpfen) misst das Skript; der Einleitungstext rückt unter die Knöpfe. */
 @media (max-width:700px){
@@ -243,7 +256,7 @@ footer.fuss a{color:#c9cfca}
 <header class="kopf">
   <div class="wrap">
     <a href="#" aria-label="CHEAPER XMAS, Startseite"><span class="wm" role="img" aria-label="CHEAPER XMAS"><b aria-hidden="true">Cheaper</b><i aria-hidden="true">Xmas</i></span></a>
-    <nav aria-label="Kurzwahl"><a href="#kanal">Zum Kanal ↓</a></nav>
+    <nav aria-label="Kurzwahl"><a href="#kanal">Kanäle ansehen ↓</a></nav>
   </div>
 </header>
 <main>
@@ -255,14 +268,14 @@ footer.fuss a{color:#c9cfca}
     <img class="kette" data-src="lichterkette.webp" alt="">
     <canvas id="schnee"></canvas>
   </div>
-  <div class="lupe" aria-hidden="true"><div class="griff"></div><div class="glas"><div class="innen"><div class="ebene drin"><img alt="" data-quer="glas2-quer.webp" data-hoch="glas2-hoch.webp"></div></div></div></div>
-  <div class="unter leer" aria-live="polite"><small>Unter der Lupe (Beispiel)</small><b></b><span></span></div>
+  <div class="lupe" aria-hidden="true"><span class="zieh">Lupe am Griff ziehen</span><div class="griff"></div><div class="glas"><div class="innen"><div class="ebene drin"><img alt="" data-quer="glas2-quer.webp" data-hoch="glas2-hoch.webp"></div></div></div></div>
+  <div class="unter leer" aria-live="polite"><small>Beispiel-Deal · Preis vom 15.10.2026</small><b></b><span></span></div>
   <p class="ki">Hintergrund und Deko: KI-generiert. Produktfotos: von den Shops.</p>
 
   <div class="wrap inhalt">
     <div class="text">
       <span class="eyebrow">Geschenke-Deals für Österreich und Deutschland</span>
-      <p class="kein-shop"><b>Kein Shop.</b> Ein kostenloser WhatsApp-Kanal.</p>
+      <p class="kein-shop"><b>Kein Shop.</b> <span class="nur-pc">Ein kostenloser WhatsApp-Kanal.</span><span class="nur-handy">Geprüfte Geschenke-Deals für Österreich und Deutschland, kostenlos auf WhatsApp und Telegram.</span></p>
       <h1>Wir suchen.<br>Wir finden.<br><em>Du schenkst.</em></h1>
       <p class="lead">Schau durch die Lupe: In den Kugeln und Geschenken stecken Angebote. Jeden Tag <b>geprüfte Geschenke-Deals</b> direkt in dein WhatsApp oder Telegram. Du kaufst wie immer im Shop.</p>
       <div class="cta" id="kanal">
@@ -277,6 +290,7 @@ footer.fuss a{color:#c9cfca}
   <div class="wrap">
     <h2>Unter der Lupe</h2>
     <p class="einleitung">Was wir in den Kugeln gefunden haben. Jeder Preis wird gegen andere Shops geprüft, nicht gegen einen durchgestrichenen Fantasiepreis.</p>
+    <p class="transparenz"><b>So finanzieren wir uns:</b> Mit * gekennzeichnete Links sind Werbelinks. Kaufst du darüber, bekommen wir vielleicht eine kleine Provision. Für dich wird nichts teurer. Die Beispielpreise auf dieser Seite sind vom 15.10.2026 und können sich ändern.</p>
     <div class="kugeln">
       <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt="" loading="lazy" decoding="async"><img class="prod" src="produkte/b2.webp" loading="lazy" decoding="async" alt="LEGO Weihnachtsbaum"></div><b>LEGO Weihnachtsbaum (40573)</b><span>42,95 € bei BRICKMO</span><small>Beispiel, Preis vom 15.10.2026</small></div>
       <div class="kugel-karte"><div class="bild"><img src="glaskugel.webp" alt="" loading="lazy" decoding="async"><img class="prod" src="produkte/b6.webp" loading="lazy" decoding="async" alt="LEGO Mini-Orchidee"></div><b>LEGO Mini-Orchidee (10343)</b><span>17,99 € bei BAUR</span><small>Beispiel, Preis vom 15.10.2026</small></div>
@@ -417,7 +431,7 @@ footer.fuss a{color:#c9cfca}
   if (document.readyState === 'complete') start(); else addEventListener('load', start);
   function los(){ clearTimeout(loslassTimer); loslassTimer = setTimeout(function(){ aktiv = false; zielZeit = performance.now(); }, 2500); }
   griff.addEventListener('pointerdown', function(e){ var r = hero.getBoundingClientRect(); greift = true; aktiv = true; clearTimeout(loslassTimer);
-    ox = (e.clientX - r.left) - ax; oy = (e.clientY - r.top) - ay; lupe.classList.add('greift'); try { griff.setPointerCapture(e.pointerId); } catch (x) {} e.preventDefault(); });
+    ox = (e.clientX - r.left) - ax; oy = (e.clientY - r.top) - ay; lupe.classList.add('greift', 'gezogen'); try { griff.setPointerCapture(e.pointerId); } catch (x) {} e.preventDefault(); });
   griff.addEventListener('pointermove', function(e){ if (!greift) return; var r = hero.getBoundingClientRect();
     zx = Math.min(Math.max(e.clientX - r.left - ox, 0), w); zy = Math.min(Math.max(e.clientY - r.top - oy, 0), h);
     if (ruhig){ ax = zx; ay = zy; setz(); karteZeigen(); } });
